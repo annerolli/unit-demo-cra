@@ -1,0 +1,19 @@
+name: Realese actions
+on:
+  push:
+    tags:
+      - 'v[0-9]+'
+jobs:
+  realese:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: echo "detect ${{ github.event_name }}"
+      # - name: Install dependencies
+      #   run: npm ci
